@@ -763,22 +763,42 @@ body {
 
 /* ---------- НОРМАЛЬНЫЙ ВИД НА ПК ДЛЯ ЭКРАНОВ ПРИЛОЖЕНИЯ ---------- */
 
-@media (min-width: 900px) {
-    .app-body {
-        background: #f6f7fb;
-        display: block;
-    }
+/* ОБЩИЙ ФОН ДЛЯ ЭКРАНОВ ПРИЛОЖЕНИЯ */
+.app-body {
+    background: #f6f7fb;
+    /* светлый фон и на ПК, и на телефоне */
+}
 
-    .app-shell,
-    .reels-shell {
-        max-width: 960px;
-        margin: 24px auto;
-        border-radius: 18px;
-        box-shadow: 0 20px 40px rgba(15, 18, 61, 0.16);
-        overflow: hidden;
-    }
+/* ОБОЛОЧКА ДЛЯ РЕБЁНКА И РОДИТЕЛЯ */
+.app-shell {
+    width: 100%;
+    max-width: 960px;
+    /* шире, чем 480px */
+    min-height: 100vh;
+    margin: 0 auto;
+    /* по центру */
+    background: linear-gradient(180deg, #f6f7fb 0%, #e7ebff 100%);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(15, 18, 61, 0.16);
+    overflow: hidden;
+}
 
-    .app-content {
-        padding: 24px 32px 80px;
-    }
+/* ОБОЛОЧКА ДЛЯ REELS */
+.reels-shell {
+    width: 100%;
+    max-width: 960px;
+    /* ровно так же */
+    min-height: 100vh;
+    margin: 0 auto;
+    background: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(15, 18, 61, 0.16);
+    overflow: hidden;
 }
