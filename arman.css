@@ -657,4 +657,108 @@ body {
     .grid-2 {
         grid-template-columns: 1fr;
     }
+    /* ---------- REELS (вертикальные ролики) ---------- */
+
+.reels-shell {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    background: #000;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.reels-wrapper {
+    flex: 1;
+    height: 100vh;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+}
+
+.reel {
+    height: calc(100vh - 60px - 56px); /* высота экрана минус шапка и навбар */
+    scroll-snap-align: start;
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    background: #000;
+}
+
+.reel-inner {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.reel-video {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reel-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.reel-info {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 16px;
+    z-index: 2;
+    padding-right: 60px;
+}
+
+.reel-tag {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #c8c9ff;
+    margin-bottom: 4px;
+}
+
+.reel-title {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.reel-desc {
+    font-size: 13px;
+    color: #e4e6ff;
+    margin-bottom: 8px;
+}
+
+.reel-actions {
+    position: absolute;
+    right: 8px;
+    bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 3;
+}
+
+.reel-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.reel-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}   
 }
