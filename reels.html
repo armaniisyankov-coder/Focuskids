@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FocusKids · Reels</title>
-   <link rel="stylesheet" href="arman.css?v=2">
-
+    <link rel="stylesheet" href="arman.css?v=3">
 </head>
 <body class="app-body">
 
@@ -25,7 +24,6 @@
         <section class="reel">
             <div class="reel-inner">
                 <div class="reel-video">
-                    <!-- Положи video1.mp4 в ту же папку -->
                     <video src="video1.mp4" muted playsinline></video>
                 </div>
                 <div class="reel-info">
@@ -87,18 +85,25 @@
     </main>
 
     <nav class="bottom-nav">
-        <a href="reels.html" class="bottom-nav-item bottom-nav-item-active">
+        <a href="reels.html?v=3" class="bottom-nav-item bottom-nav-item-active">
             🎥 <span>Reels</span>
         </a>
-        <a href="app-child.html" class="bottom-nav-item">
+        <a href="app-child.html?v=3" class="bottom-nav-item">
             📚 <span>Лента</span>
         </a>
-        <a href="app-parent.html" class="bottom-nav-item">
+        <a href="app-parent.html?v=3" class="bottom-nav-item">
             👨‍👩‍👧 <span>Родитель</span>
         </a>
     </nav>
+
+    <!-- Оверлей при запрете или лимите -->
+    <div class="reels-overlay" id="reels-overlay" hidden>
+        <div class="reels-overlay-content" id="reels-overlay-text">
+            Reels отключены родителем.
+        </div>
+    </div>
 </div>
 
-<script src="arman.js"></script>
+<script src="arman.js?v=3"></script>
 </body>
 </html>

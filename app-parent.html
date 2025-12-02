@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FocusKids · Панель родителя</title>
-   <link rel="stylesheet" href="arman.css?v=2">
-
+    <link rel="stylesheet" href="arman.css?v=3">
 </head>
 <body class="app-body">
 
@@ -30,7 +29,7 @@
                 <p class="parent-stat"><strong>32 мин</strong> образовательных видео</p>
                 <p class="parent-stat"><strong>0</strong> коротких клипов</p>
                 <p class="card-text">
-                    Короткие ролики ограничены до 5 минут в день.
+                    Короткие ролики ограничены до <span id="settings-short-limit-text">3</span> Reels подряд.
                 </p>
             </div>
 
@@ -38,61 +37,104 @@
             <div class="card parent-card">
                 <h2>Фильтр тем</h2>
                 <p class="card-text">Отмеченные темы появляются чаще в ленте ребёнка.</p>
-                <div class="app-chips">
-                    <button class="chip chip-active">Наука</button>
-                    <button class="chip chip-active">Животные</button>
-                    <button class="chip">Игры</button>
-                    <button class="chip">Развлекуха</button>
-                    <button class="chip chip-active">Космос</button>
+                <div class="app-chips" id="parent-topics">
+                    <button class="chip" data-topic-toggle="science">Наука</button>
+                    <button class="chip" data-topic-toggle="animals">Животные</button>
+                    <button class="chip" data-topic-toggle="history">История</button>
+                    <button class="chip" data-topic-toggle="space">Космос</button>
                 </div>
             </div>
 
             <!-- НАСТРОЙКИ ФИЛЬТРА -->
             <div class="card parent-card">
                 <h2>Настройки фильтра</h2>
-                <ul class="rules-list">
+                <ul class="rules-list" id="settings-summary">
                     <li>
                         <strong>Короткие видео:</strong>
-                        <span>разрешены только в образовательных подборках</span>
+                        <span id="settings-shorts-allowed-text">разрешены в режиме обучения</span>
                     </li>
                     <li>
                         <strong>Максимум коротких роликов подряд:</strong>
-                        <span>3 Reels</span>
+                        <span id="settings-short-limit-inline">3</span> Reels
                     </li>
                     <li>
                         <strong>Запрет тем:</strong>
                         <span>случайные тренды, челленджи, токсичный юмор</span>
                     </li>
                 </ul>
-                <button class="btn btn-primary btn-small">Изменить настройки</button>
+                <button class="btn btn-primary btn-small" id="open-settings">
+                    Изменить настройки
+                </button>
             </div>
 
             <!-- ПРАВИЛА -->
             <div class="card parent-card">
                 <h2>Правила использования</h2>
                 <ul class="rules-list">
-                    <li>Максимум 40 минут видео в будни</li>
+                    <li>Максимум <span id="settings-max-minutes">40</span> минут видео в будни</li>
                     <li>Короткие видео только после уроков</li>
                     <li>Перед сном — только спокойные ролики и чтение</li>
                 </ul>
-                <button class="btn btn-ghost btn-small">Поделиться правилами с ребёнком</button>
+                <button class="btn btn-ghost btn-small" id="share-rules">
+                    Поделиться правилами с ребёнком
+                </button>
+                <p class="share-hint" id="share-hint" hidden>Текст правил скопирован в буфер обмена ✔</p>
             </div>
         </section>
     </main>
 
     <nav class="bottom-nav">
-        <a href="app-child.html" class="bottom-nav-item">
+        <a href="app-child.html?v=3" class="bottom-nav-item">
             📚 <span>Лента ребёнка</span>
         </a>
-        <a href="app-parent.html" class="bottom-nav-item bottom-nav-item-active">
+        <a href="app-parent.html?v=3" class="bottom-nav-item bottom-nav-item-active">
             📊 <span>Родитель</span>
         </a>
-        <a href="index.html" class="bottom-nav-item">
+        <a href="index.html?v=3" class="bottom-nav-item">
             🌐 <span>Сайт</span>
         </a>
     </nav>
 </div>
 
-<script src="arman.js"></script>
+<!-- МОДАЛКА НАСТРОЕК -->
+<div class="modal-backdrop" id="settings-modal" hidden>
+    <div class="modal">
+        <div class="modal-header">
+            <h2>Настройки умной ленты</h2>
+            <button class="modal-close" id="close-settings">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-block">
+                <label class="toggle">
+                    <input type="checkbox" id="allow-shorts-input" checked>
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Разрешать короткие Reels</span>
+                </label>
+                <p class="modal-note">
+                    Если выключить — раздел Reels будет скрыт у ребёнка.
+                </p>
+            </div>
+
+            <div class="modal-block">
+                <label for="shorts-limit-input">Максимум коротких роликов подряд</label>
+                <input type="range" id="shorts-limit-input" min="1" max="5" value="3">
+                <div class="range-value">
+                    <span id="shorts-limit-value">3</span> Reels
+                </div>
+            </div>
+
+            <div class="modal-block">
+                <label>Максимум минут видео в будни</label>
+                <input type="number" id="max-minutes-input" min="10" max="120" step="5" value="40">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-ghost btn-small" id="cancel-settings">Отмена</button>
+            <button class="btn btn-primary btn-small" id="save-settings">Сохранить</button>
+        </div>
+    </div>
+</div>
+
+<script src="arman.js?v=3"></script>
 </body>
 </html>

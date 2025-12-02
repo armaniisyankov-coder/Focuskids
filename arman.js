@@ -1,3 +1,33 @@
+// Ключ для localStorage
+const SETTINGS_KEY = "focuskids-settings";
+
+const defaultSettings = {
+    allowShorts: true,
+    shortsLimit: 3,
+    maxMinutes: 40,
+    preferredTopics: ["science", "animals", "space"],
+};
+
+// загрузка/сохранение
+function loadSettings() {
+    try {
+        const raw = localStorage.getItem(SETTINGS_KEY);
+        if (!raw) return { ...defaultSettings };
+        const parsed = JSON.parse(raw);
+        return { ...defaultSettings, ...parsed };
+    } catch {
+        return { ...defaultSettings };
+    }
+}
+
+function saveSettings(settings) {
+    try {
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+    } catch {
+        // игнор
+    }
+}
+
 // ---------- Бургер-меню на главном сайте ----------
 const navToggle = document.getElementById("navToggle");
 const nav = document.querySelector(".nav");
@@ -8,20 +38,188 @@ if (navToggle && nav) {
     });
 }
 
-// ---------- Фильтр "умной ленты" на экране ребёнка ----------
-const topicChips = document.querySelectorAll(".chip[data-topic]");
-const feedCards = document.querySelectorAll(".feed-card[data-topic]");
+// ---------- ЛОГИКА ПАНЕЛИ РОДИТЕЛЯ ----------
+(function setupParentScreen() {
+    const openBtn = document.getElementById("open-settings");
+    const modal = document.getElementById("settings-modal");
+    if (!openBtn || !modal) return; // значит мы не на этой странице
 
-if (topicChips.length && feedCards.length) {
+    const closeBtn = document.getElementById("close-settings");
+    const cancelBtn = document.getElementById("cancel-settings");
+    const saveBtn = document.getElementById("save-settings");
+
+    const allowShortsInput = document.getElementById("allow-shorts-input");
+    const shortsLimitInput = document.getElementById("shorts-limit-input");
+    const shortsLimitValue = document.getElementById("shorts-limit-value");
+    const maxMinutesInput = document.getElementById("max-minutes-input");
+
+    const shortLimitText = document.getElementById("settings-short-limit-text");
+    const shortLimitInline = document.getElementById("settings-short-limit-inline");
+    const shortsAllowedText = document.getElementById("settings-shorts-allowed-text");
+    const maxMinutesText = document.getElementById("settings-max-minutes");
+
+    const topicsContainer = document.getElementById("parent-topics");
+
+    const shareBtn = document.getElementById("share-rules");
+    const shareHint = document.getElementById("share-hint");
+
+    let settings = loadSettings();
+
+    // отрисовать текущее состояние в UI
+    function applySettingsToUI() {
+        allowShortsInput.checked = settings.allowShorts;
+        shortsLimitInput.value = settings.shortsLimit;
+        shortsLimitValue.textContent = String(settings.shortsLimit);
+
+        maxMinutesInput.value = settings.maxMinutes;
+        if (shortLimitText) shortLimitText.textContent = settings.shortsLimit;
+        if (shortLimitInline)
+            shortLimitInline.textContent = String(settings.shortsLimit);
+        if (shortsAllowedText) {
+            shortsAllowedText.textContent = settings.allowShorts
+                ? "разрешены в режиме обучения"
+                : "полностью отключены";
+        }
+        if (maxMinutesText) maxMinutesText.textContent = String(settings.maxMinutes);
+
+        // темы
+        if (topicsContainer) {
+            topicsContainer
+                .querySelectorAll("[data-topic-toggle]")
+                .forEach((btn) => {
+                    const topic = btn.getAttribute("data-topic-toggle");
+                    if (settings.preferredTopics.includes(topic)) {
+                        btn.classList.add("chip-active");
+                    } else {
+                        btn.classList.remove("chip-active");
+                    }
+                });
+        }
+    }
+
+    applySettingsToUI();
+
+    // открытие / закрытие модалки
+    function openModal() {
+        modal.hidden = false;
+    }
+    function closeModal() {
+        modal.hidden = true;
+    }
+
+    openBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+    cancelBtn.addEventListener("click", closeModal);
+
+    // обновление цифры под слайдером
+    shortsLimitInput.addEventListener("input", () => {
+        shortsLimitValue.textContent = shortsLimitInput.value;
+    });
+
+    // запись настроек
+    saveBtn.addEventListener("click", () => {
+        settings.allowShorts = allowShortsInput.checked;
+        settings.shortsLimit = Number(shortsLimitInput.value) || 3;
+        settings.maxMinutes = Number(maxMinutesInput.value) || 40;
+
+        // собрать темы из кнопок
+        const newTopics = [];
+        if (topicsContainer) {
+            topicsContainer
+                .querySelectorAll("[data-topic-toggle]")
+                .forEach((btn) => {
+                    const topic = btn.getAttribute("data-topic-toggle");
+                    if (btn.classList.contains("chip-active")) {
+                        newTopics.push(topic);
+                    }
+                });
+        }
+        settings.preferredTopics = newTopics.length
+            ? newTopics
+            : [...defaultSettings.preferredTopics];
+
+        saveSettings(settings);
+        applySettingsToUI();
+        closeModal();
+    });
+
+    // переключение тем по клику
+    if (topicsContainer) {
+        topicsContainer
+            .querySelectorAll("[data-topic-toggle]")
+            .forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    btn.classList.toggle("chip-active");
+                });
+            });
+    }
+
+    // "Поделиться правилами" — копируем текст
+    if (shareBtn && shareHint) {
+        shareBtn.addEventListener("click", async () => {
+            const text =
+                "Наши правила:\n" +
+                `• максимум ${settings.maxMinutes} минут видео в будни;\n` +
+                `• короткие ролики не более ${settings.shortsLimit} подряд;\n` +
+                "• Reels " +
+                (settings.allowShorts ? "разрешены в учебном режиме." : "сейчас отключены.");
+            try {
+                await navigator.clipboard.writeText(text);
+                shareHint.hidden = false;
+                setTimeout(() => (shareHint.hidden = true), 2500);
+            } catch {
+                shareHint.textContent = "Не удалось скопировать, но правила можно прочитать выше.";
+                shareHint.hidden = false;
+            }
+        });
+    }
+})();
+
+// ---------- ФИЛЬТР "УМНОЙ ЛЕНТЫ" + ПРИМЕНЕНИЕ НАСТРОЕК РОДИТЕЛЯ ----------
+(function setupChildFeed() {
+    const topicChips = document.querySelectorAll(".chip[data-topic]");
+    const feedCards = document.querySelectorAll(".feed-card[data-topic]");
+    if (!topicChips.length || !feedCards.length) return;
+
+    const navReels = document.getElementById("nav-reels");
+    const subtitle = document.getElementById("child-subtitle");
+    const settings = loadSettings();
+
+    // отметить предпочитаемые темы
+    topicChips.forEach((chip) => {
+        const topic = chip.dataset.topic;
+        if (
+            topic !== "all" &&
+            settings.preferredTopics &&
+            settings.preferredTopics.includes(topic)
+        ) {
+            chip.classList.add("chip-active-preferred");
+        }
+    });
+
+    // описание настроек
+    if (subtitle) {
+        const topicsNice =
+            settings.preferredTopics && settings.preferredTopics.length
+                ? settings.preferredTopics.length
+                : "нескольких";
+        subtitle.textContent = `Лента настроена родителем: приоритет у ${topicsNice} тем, короткие Reels ${
+            settings.allowShorts ? "разрешены в учебном режиме" : "сейчас отключены"
+        }.`;
+    }
+
+    // показать / скрыть пункт Reels
+    if (navReels && !settings.allowShorts) {
+        navReels.classList.add("disabled");
+    }
+
+    // фильтрация
     topicChips.forEach((chip) => {
         chip.addEventListener("click", () => {
             const topic = chip.dataset.topic;
-
-            // активный чип
             topicChips.forEach((c) => c.classList.remove("chip-active"));
             chip.classList.add("chip-active");
 
-            // фильтрация карточек
             feedCards.forEach((card) => {
                 const cardTopic = card.dataset.topic;
                 if (topic === "all" || topic === cardTopic) {
@@ -32,20 +230,41 @@ if (topicChips.length && feedCards.length) {
             });
         });
     });
-}
+})();
 
-// ---------- Reels: кнопка "⏭" пролистывает на следующий ролик ----------
-const nextButtons = document.querySelectorAll("[data-next]");
-const reelsWrapper = document.querySelector(".reels-wrapper");
-const reels = document.querySelectorAll(".reel");
+// ---------- REELS: УЧЁТ ЛИМИТА И ЗАПРЕТА ----------
+(function setupReels() {
+    const reelsWrapper = document.querySelector(".reels-wrapper");
+    const reels = document.querySelectorAll(".reel");
+    const nextButtons = document.querySelectorAll("[data-next]");
+    const overlay = document.getElementById("reels-overlay");
+    const overlayText = document.getElementById("reels-overlay-text");
+    if (!reelsWrapper || !reels.length || !overlay || !overlayText) return;
 
-if (nextButtons.length && reelsWrapper && reels.length) {
+    const settings = loadSettings();
+
+    if (!settings.allowShorts) {
+        overlayText.textContent = "Reels отключены родителем. Посмотри ленту с обучающими видео.";
+        overlay.hidden = false;
+        return;
+    }
+
+    let viewed = 0;
+    const maxViewed = settings.shortsLimit || 3;
+
     nextButtons.forEach((btn, index) => {
         btn.addEventListener("click", () => {
+            if (viewed >= maxViewed - 1) {
+                overlayText.textContent =
+                    "Лимит коротких роликов на сейчас исчерпан. Вернись к обучающей ленте 🙂";
+                overlay.hidden = false;
+                return;
+            }
             const next = reels[index + 1];
             if (next) {
+                viewed += 1;
                 next.scrollIntoView({ behavior: "smooth" });
             }
         });
     });
-}
+})();
