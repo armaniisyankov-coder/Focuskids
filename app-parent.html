@@ -1,130 +1,145 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FocusKids · Панель родителя</title>
-    <link rel="stylesheet" href="arman.css?v=4">
+    <title>FocusKids · Родитель</title>
+    <link rel="stylesheet" href="arman.css?v=9">
 </head>
+
 <body class="app-body">
 
-<div class="app-shell">
-    <header class="app-header">
-        <div class="app-title">
-            <span class="app-logo-dot"></span>
-            FocusKids · Родитель
-        </div>
-    </header>
+    <!-- ОБОЛОЧКА -->
+    <div class="app-shell">
 
-    <main class="app-content">
-        <h1 class="app-heading">Контроль контента</h1>
-        <p class="app-subtitle">
-            Видите, что ребёнок смотрит, настраиваете фильтры и правила умной ленты.
-        </p>
-
-        <section class="parent-grid">
-            <!-- АКТИВНОСТЬ -->
-            <div class="card parent-card">
-                <h2>Сегодняшняя активность</h2>
-                <p class="parent-stat"><strong>32 мин</strong> образовательных видео</p>
-                <p class="parent-stat"><strong>0</strong> коротких клипов</p>
-                <p class="card-text">
-                    Короткие ролики ограничены до <span id="settings-short-limit-text">3</span> Reels подряд.
-                </p>
+        <!-- ШАПКА -->
+        <header class="header">
+            <div class="header-title">
+                <span class="dot"></span>
+                <span>FocusKids · Родитель</span>
             </div>
+        </header>
 
-            <!-- ФИЛЬТР ТЕМ -->
-            <div class="card parent-card">
-                <h2>Фильтр тем</h2>
-                <p class="card-text">Отмеченные темы появляются чаще в ленте ребёнка.</p>
-                <div class="app-chips" id="parent-topics">
+        <!-- КОНТЕНТ -->
+        <main class="content">
+
+            <h2>Контроль контента</h2>
+            <p class="subtitle">
+                Видите, что ребёнок смотрит, настраиваете фильтры и правила умной ленты.
+            </p>
+
+            <!-- Блок активности -->
+            <section class="card">
+                <h3>Сегодняшняя активность</h3>
+
+                <p><b>32 мин</b> образовательных видео</p>
+                <p><b>0</b> коротких клипов</p>
+
+                <p class="note">
+                    Короткие ролики ограничены до <span id="settings-short-limit-inline">3</span> Reels подряд.
+                </p>
+            </section>
+
+            <!-- Фильтр тем -->
+            <section class="card">
+                <h3>Фильтр тем</h3>
+
+                <p class="note">Отмеченные темы появляются чаще в ленте ребёнка.</p>
+
+                <div class="chips" id="parent-topics">
                     <button class="chip" data-topic-toggle="science">Наука</button>
                     <button class="chip" data-topic-toggle="animals">Животные</button>
                     <button class="chip" data-topic-toggle="history">История</button>
+                    <button class="chip" data-topic-toggle="fun">Развлечение</button>
                     <button class="chip" data-topic-toggle="space">Космос</button>
                 </div>
-            </div>
+            </section>
 
-            <!-- НАСТРОЙКИ ФИЛЬТРА -->
-            <div class="card parent-card">
-                <h2>Настройки фильтра</h2>
-                <ul class="rules-list" id="settings-summary">
-                    <li>
-                        <strong>Короткие видео:</strong>
-                        <span id="settings-shorts-allowed-text">разрешены в режиме обучения</span>
-                    </li>
-                    <li>
-                        <strong>Максимум коротких роликов подряд:</strong>
-                        <span id="settings-short-limit-inline">3</span> Reels
-                    </li>
-                    <li>
-                        <strong>Запрет тем:</strong>
-                        <span>случайные тренды, челленджи, токсичный юмор</span>
-                    </li>
+            <!-- Настройки фильтра -->
+            <section class="card">
+                <h3>Настройки фильтра</h3>
+
+                <ul class="list">
+                    <li>Короткие видео: <span id="settings-shorts-allowed-text">разрешены</span></li>
+                    <li>Максимум коротких роликов подряд: <span id="settings-short-limit-text">3</span> Reels</li>
+                    <li>Запрет тем: случайные тренды, челленджи, токсичный юмор</li>
                 </ul>
-                <button class="btn btn-primary btn-small" id="open-settings">
-                    Изменить настройки
-                </button>
-            </div>
 
-            <!-- ПРАВИЛА -->
-            <div class="card parent-card">
-                <h2>Правила использования</h2>
-                <ul class="rules-list">
+                <button class="btn btn-primary" id="open-settings">Изменить настройки</button>
+            </section>
+
+            <!-- Правила -->
+            <section class="card">
+                <h3>Правила использования</h3>
+
+                <ul class="list">
                     <li>Максимум <span id="settings-max-minutes">40</span> минут видео в будни</li>
                     <li>Короткие видео только после уроков</li>
                     <li>Перед сном — только спокойные ролики и чтение</li>
                 </ul>
-                <button class="btn btn-ghost btn-small" id="share-rules">
-                    Поделиться правилами с ребёнком
-                </button>
-                <p class="share-hint" id="share-hint" hidden>
-                    Текст правил скопирован в буфер обмена ✔
-                </p>
+
+                <button class="btn btn-secondary" id="share-rules">Поделиться правилами с ребёнком</button>
+                <p id="share-hint" class="success" hidden>Готово! Правила скопированы 👍</p>
+            </section>
+
+        </main>
+
+        <!-- МЕНЮ -->
+        <nav class="bottom-nav">
+            <a href="app-child.html" class="nav-item">
+                <img src="icons/home.svg">
+                <span>Лента ребёнка</span>
+            </a>
+            <a class="nav-item active">
+                <img src="icons/parent.svg">
+                <span>Родитель</span>
+            </a>
+            <a href="index.html" class="nav-item">
+                <img src="icons/web.svg">
+                <span>Сайт</span>
+            </a>
+        </nav>
+
+    </div>
+
+
+
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div id="settings-modal" hidden>
+        <div class="modal-window">
+
+            <button class="modal-close" id="close-settings">✕</button>
+
+            <h3>Настройки умной ленты</h3>
+
+            <label class="switch-row">
+                <input type="checkbox" id="allow-shorts-input">
+                <span>Разрешать короткие Reels</span>
+            </label>
+            <p class="note">
+                Если выключить — раздел Reels будет скрыт у ребёнка.
+            </p>
+
+            <label>
+                Максимум коротких роликов подряд:
+                <span id="shorts-limit-value">3</span>
+            </label>
+            <input type="range" id="shorts-limit-input" min="1" max="5">
+
+            <label style="margin-top:16px;">
+                Максимум минут видео в будни
+            </label>
+            <input type="number" id="max-minutes-input" min="10" max="180">
+
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" id="cancel-settings">Отмена</button>
+                <button class="btn btn-primary" id="save-settings">Сохранить</button>
             </div>
-        </section>
-    </main>
+        </div>
+    </div>
 
-    <nav class="bottom-nav">
-        <a href="app-child.html?v=4" class="bottom-nav-item">
-            📚 <span>Лента ребёнка</span>
-        </a>
-        <a href="app-parent.html?v=4" class="bottom-nav-item bottom-nav-item-active">
-            📊 <span>Родитель</span>
-        </a>
-        <a href="index.html?v=4" class="bottom-nav-item">
-            🌐 <span>Сайт</span>
-        </a>
-    </nav>
-</div>
-
-<!-- МОДАЛКА НАСТРОЕК -->
-<button
-    class="modal-close"
-    id="close-settings"
-    onclick="document.getElementById('settings-modal').hidden=true"
->
-    ✕
-</button>
-
-...
-
-<button
-    class="btn btn-ghost btn-small"
-    id="cancel-settings"
-    onclick="document.getElementById('settings-modal').hidden=true"
->
-    Отмена
-</button>
-
-<button
-    class="btn btn-primary btn-small"
-    id="save-settings"
->
-    Сохранить
-</button>
-
-
-<script src="arman.js?v=4"></script>
+    <script src="arman.js?v=9"></script>
 </body>
+
 </html>
