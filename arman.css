@@ -430,7 +430,7 @@ body {
     font-size: 12px;
 }
 
-/* ---------- APP LAYOUT (МОБИЛЬНОЕ «ПРИЛОЖЕНИЕ») ---------- */
+/* ---------- APP LAYOUT (МОБИЛЬНОЕ ПРИЛОЖЕНИЕ) ---------- */
 
 .app-body {
     background: #0f1020;
@@ -612,52 +612,7 @@ body {
     font-weight: 600;
 }
 
-/* АДАПТИВ */
-
-@media (max-width: 900px) {
-    .hero-inner {
-        grid-template-columns: 1fr;
-    }
-
-    .hero-right {
-        order: -1;
-    }
-
-    .grid-3 {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media (max-width: 700px) {
-    .header-inner {
-        gap: 10px;
-    }
-
-    .nav {
-        position: absolute;
-        right: 20px;
-        top: 56px;
-        flex-direction: column;
-        background: #ffffff;
-        padding: 10px 14px;
-        border-radius: 16px;
-        box-shadow: 0 14px 32px rgba(15, 18, 61, 0.18);
-        display: none;
-    }
-
-    .nav.show {
-        display: flex;
-    }
-
-    .nav-toggle {
-        display: block;
-    }
-
-    .grid-3,
-    .grid-2 {
-        grid-template-columns: 1fr;
-    }
-    /* ---------- REELS (вертикальные ролики) ---------- */
+/* ---------- REELS (вертикальные ролики) ---------- */
 
 .reels-shell {
     width: 100%;
@@ -678,7 +633,7 @@ body {
 }
 
 .reel {
-    height: calc(100vh - 60px - 56px); /* высота экрана минус шапка и навбар */
+    height: calc(100vh - 60px - 56px);
     scroll-snap-align: start;
     position: relative;
     display: flex;
@@ -758,7 +713,72 @@ body {
     justify-content: center;
     cursor: pointer;
 }
-.reel-btn:hover {
-    background: rgba(0, 0, 0, 0.8);
-}   
+
+/* ---------- АДАПТИВНОСТЬ ---------- */
+
+@media (max-width: 900px) {
+    .hero-inner {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-right {
+        order: -1;
+    }
+
+    .grid-3 {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .header-inner {
+        gap: 10px;
+    }
+
+    .nav {
+        position: absolute;
+        right: 20px;
+        top: 56px;
+        flex-direction: column;
+        background: #ffffff;
+        padding: 10px 14px;
+        border-radius: 16px;
+        box-shadow: 0 14px 32px rgba(15, 18, 61, 0.18);
+        display: none;
+    }
+
+    .nav.show {
+        display: flex;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .grid-3,
+    .grid-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ---------- НОРМАЛЬНЫЙ ВИД НА ПК ДЛЯ ЭКРАНОВ ПРИЛОЖЕНИЯ ---------- */
+
+@media (min-width: 900px) {
+    .app-body {
+        background: #f6f7fb;
+        display: block;
+    }
+
+    .app-shell,
+    .reels-shell {
+        max-width: 960px;
+        margin: 24px auto;
+        border-radius: 18px;
+        box-shadow: 0 20px 40px rgba(15, 18, 61, 0.16);
+        overflow: hidden;
+    }
+
+    .app-content {
+        padding: 24px 32px 80px;
+    }
 }
