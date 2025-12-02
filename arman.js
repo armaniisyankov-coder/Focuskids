@@ -1,4 +1,4 @@
-// Ключ для localStorage
+// ключ для хранения настроек
 const SETTINGS_KEY = "focuskids-settings";
 
 const defaultSettings = {
@@ -8,7 +8,6 @@ const defaultSettings = {
     preferredTopics: ["science", "animals", "space"],
 };
 
-// загрузка/сохранение
 function loadSettings() {
     try {
         const raw = localStorage.getItem(SETTINGS_KEY);
@@ -24,11 +23,11 @@ function saveSettings(settings) {
     try {
         localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
     } catch {
-        // игнор
+        // ignore
     }
 }
 
-// ---------- Бургер-меню на главном сайте ----------
+// ---------- Бургер-меню на лендинге ----------
 const navToggle = document.getElementById("navToggle");
 const nav = document.querySelector(".nav");
 
@@ -38,11 +37,11 @@ if (navToggle && nav) {
     });
 }
 
-// ---------- ЛОГИКА ПАНЕЛИ РОДИТЕЛЯ ----------
+// ---------- ПАНЕЛЬ РОДИТЕЛЯ ----------
 (function setupParentScreen() {
     const openBtn = document.getElementById("open-settings");
     const modal = document.getElementById("settings-modal");
-    if (!openBtn || !modal) return; // значит мы не на этой странице
+    if (!openBtn || !modal) return;
 
     const closeBtn = document.getElementById("close-settings");
     const cancelBtn = document.getElementById("cancel-settings");
@@ -65,13 +64,12 @@ if (navToggle && nav) {
 
     let settings = loadSettings();
 
-    // отрисовать текущее состояние в UI
     function applySettingsToUI() {
         allowShortsInput.checked = settings.allowShorts;
         shortsLimitInput.value = settings.shortsLimit;
         shortsLimitValue.textContent = String(settings.shortsLimit);
-
         maxMinutesInput.value = settings.maxMinutes;
+
         if (shortLimitText) shortLimitText.textContent = settings.shortsLimit;
         if (shortLimitInline)
             shortLimitInline.textContent = String(settings.shortsLimit);
@@ -82,7 +80,6 @@ if (navToggle && nav) {
         }
         if (maxMinutesText) maxMinutesText.textContent = String(settings.maxMinutes);
 
-        // темы
         if (topicsContainer) {
             topicsContainer
                 .querySelectorAll("[data-topic-toggle]")
@@ -99,7 +96,6 @@ if (navToggle && nav) {
 
     applySettingsToUI();
 
-    // открытие / закрытие модалки
     function openModal() {
         modal.hidden = false;
     }
@@ -111,18 +107,15 @@ if (navToggle && nav) {
     closeBtn.addEventListener("click", closeModal);
     cancelBtn.addEventListener("click", closeModal);
 
-    // обновление цифры под слайдером
     shortsLimitInput.addEventListener("input", () => {
         shortsLimitValue.textContent = shortsLimitInput.value;
     });
 
-    // запись настроек
     saveBtn.addEventListener("click", () => {
         settings.allowShorts = allowShortsInput.checked;
         settings.shortsLimit = Number(shortsLimitInput.value) || 3;
         settings.maxMinutes = Number(maxMinutesInput.value) || 40;
 
-        // собрать темы из кнопок
         const newTopics = [];
         if (topicsContainer) {
             topicsContainer
@@ -143,7 +136,6 @@ if (navToggle && nav) {
         closeModal();
     });
 
-    // переключение тем по клику
     if (topicsContainer) {
         topicsContainer
             .querySelectorAll("[data-topic-toggle]")
@@ -154,7 +146,6 @@ if (navToggle && nav) {
             });
     }
 
-    // "Поделиться правилами" — копируем текст
     if (shareBtn && shareHint) {
         shareBtn.addEventListener("click", async () => {
             const text =
@@ -168,14 +159,15 @@ if (navToggle && nav) {
                 shareHint.hidden = false;
                 setTimeout(() => (shareHint.hidden = true), 2500);
             } catch {
-                shareHint.textContent = "Не удалось скопировать, но правила можно прочитать выше.";
+                shareHint.textContent =
+                    "Не удалось скопировать, но правила можно прочитать выше.";
                 shareHint.hidden = false;
             }
         });
     }
 })();
 
-// ---------- ФИЛЬТР "УМНОЙ ЛЕНТЫ" + ПРИМЕНЕНИЕ НАСТРОЕК РОДИТЕЛЯ ----------
+// ---------- ЛЕНТА РЕБЁНКА ----------
 (function setupChildFeed() {
     const topicChips = document.querySelectorAll(".chip[data-topic]");
     const feedCards = document.querySelectorAll(".feed-card[data-topic]");
@@ -185,7 +177,6 @@ if (navToggle && nav) {
     const subtitle = document.getElementById("child-subtitle");
     const settings = loadSettings();
 
-    // отметить предпочитаемые темы
     topicChips.forEach((chip) => {
         const topic = chip.dataset.topic;
         if (
@@ -197,23 +188,19 @@ if (navToggle && nav) {
         }
     });
 
-    // описание настроек
     if (subtitle) {
-        const topicsNice =
+        const topicsCount =
             settings.preferredTopics && settings.preferredTopics.length
                 ? settings.preferredTopics.length
                 : "нескольких";
-        subtitle.textContent = `Лента настроена родителем: приоритет у ${topicsNice} тем, короткие Reels ${
-            settings.allowShorts ? "разрешены в учебном режиме" : "сейчас отключены"
-        }.`;
+        subtitle.textContent = `Лента настроена родителем: приоритет у ${topicsCount} тем, короткие Reels ${settings.allowShorts ? "разрешены в учебном режиме" : "сейчас отключены"
+            }.`;
     }
 
-    // показать / скрыть пункт Reels
     if (navReels && !settings.allowShorts) {
         navReels.classList.add("disabled");
     }
 
-    // фильтрация
     topicChips.forEach((chip) => {
         chip.addEventListener("click", () => {
             const topic = chip.dataset.topic;
@@ -232,7 +219,7 @@ if (navToggle && nav) {
     });
 })();
 
-// ---------- REELS: УЧЁТ ЛИМИТА И ЗАПРЕТА ----------
+// ---------- REELS ----------
 (function setupReels() {
     const reelsWrapper = document.querySelector(".reels-wrapper");
     const reels = document.querySelectorAll(".reel");
@@ -244,7 +231,8 @@ if (navToggle && nav) {
     const settings = loadSettings();
 
     if (!settings.allowShorts) {
-        overlayText.textContent = "Reels отключены родителем. Посмотри ленту с обучающими видео.";
+        overlayText.textContent =
+            "Reels отключены родителем. Посмотри ленту с обучающими видео.";
         overlay.hidden = false;
         return;
     }
@@ -256,7 +244,7 @@ if (navToggle && nav) {
         btn.addEventListener("click", () => {
             if (viewed >= maxViewed - 1) {
                 overlayText.textContent =
-                    "Лимит коротких роликов на сейчас исчерпан. Вернись к обучающей ленте 🙂";
+                    "Лимит коротких роликов исчерпан. Вернись к обучающей ленте 🙂";
                 overlay.hidden = false;
                 return;
             }
