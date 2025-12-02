@@ -38,10 +38,11 @@ if (navToggle && nav) {
 }
 
 // ---------- ПАНЕЛЬ РОДИТЕЛЯ ----------
+// ---------- ПАНЕЛЬ РОДИТЕЛЯ ----------
 (function setupParentScreen() {
     const openBtn = document.getElementById("open-settings");
     const modal = document.getElementById("settings-modal");
-    if (!openBtn || !modal) return;
+    if (!openBtn || !modal) return; // не на этой странице
 
     const closeBtn = document.getElementById("close-settings");
     const cancelBtn = document.getElementById("cancel-settings");
@@ -65,20 +66,27 @@ if (navToggle && nav) {
     let settings = loadSettings();
 
     function applySettingsToUI() {
-        allowShortsInput.checked = settings.allowShorts;
-        shortsLimitInput.value = settings.shortsLimit;
-        shortsLimitValue.textContent = String(settings.shortsLimit);
-        maxMinutesInput.value = settings.maxMinutes;
+        allowShortsInput && (allowShortsInput.checked = settings.allowShorts);
+        if (shortsLimitInput) {
+            shortsLimitInput.value = settings.shortsLimit;
+        }
+        if (shortsLimitValue) {
+            shortsLimitValue.textContent = String(settings.shortsLimit);
+        }
+        if (maxMinutesInput) {
+            maxMinutesInput.value = settings.maxMinutes;
+        }
 
-        if (shortLimitText) shortLimitText.textContent = settings.shortsLimit;
-        if (shortLimitInline)
-            shortLimitInline.textContent = String(settings.shortsLimit);
+        shortLimitText && (shortLimitText.textContent = settings.shortsLimit);
+        shortLimitInline &&
+            (shortLimitInline.textContent = String(settings.shortsLimit));
         if (shortsAllowedText) {
             shortsAllowedText.textContent = settings.allowShorts
                 ? "разрешены в режиме обучения"
                 : "полностью отключены";
         }
-        if (maxMinutesText) maxMinutesText.textContent = String(settings.maxMinutes);
+        maxMinutesText &&
+            (maxMinutesText.textContent = String(settings.maxMinutes));
 
         if (topicsContainer) {
             topicsContainer
@@ -103,39 +111,66 @@ if (navToggle && nav) {
         modal.hidden = true;
     }
 
+    // открытие
     openBtn.addEventListener("click", openModal);
-    closeBtn.addEventListener("click", closeModal);
-    cancelBtn.addEventListener("click", closeModal);
 
-    shortsLimitInput.addEventListener("input", () => {
-        shortsLimitValue.textContent = shortsLimitInput.value;
-    });
+    // закрытие по кнопкам — со страховкой
+    if (closeBtn) {
+        closeBtn.addEventListener("click", closeModal);
+    }
+    if (cancelBtn) {
+        cancelBtn.addEventListener("click", closeModal);
+    }
 
-    saveBtn.addEventListener("click", () => {
-        settings.allowShorts = allowShortsInput.checked;
-        settings.shortsLimit = Number(shortsLimitInput.value) || 3;
-        settings.maxMinutes = Number(maxMinutesInput.value) || 40;
-
-        const newTopics = [];
-        if (topicsContainer) {
-            topicsContainer
-                .querySelectorAll("[data-topic-toggle]")
-                .forEach((btn) => {
-                    const topic = btn.getAttribute("data-topic-toggle");
-                    if (btn.classList.contains("chip-active")) {
-                        newTopics.push(topic);
-                    }
-                });
+    // закрытие по клику вне окна
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            closeModal();
         }
-        settings.preferredTopics = newTopics.length
-            ? newTopics
-            : [...defaultSettings.preferredTopics];
-
-        saveSettings(settings);
-        applySettingsToUI();
-        closeModal();
     });
 
+    // обновление цифры под слайдером
+    if (shortsLimitInput && shortsLimitValue) {
+        shortsLimitInput.addEventListener("input", () => {
+            shortsLimitValue.textContent = shortsLimitInput.value;
+        });
+    }
+
+    // сохранение настроек
+    if (saveBtn) {
+        saveBtn.addEventListener("click", () => {
+            if (allowShortsInput) {
+                settings.allowShorts = allowShortsInput.checked;
+            }
+            if (shortsLimitInput) {
+                settings.shortsLimit = Number(shortsLimitInput.value) || 3;
+            }
+            if (maxMinutesInput) {
+                settings.maxMinutes = Number(maxMinutesInput.value) || 40;
+            }
+
+            const newTopics = [];
+            if (topicsContainer) {
+                topicsContainer
+                    .querySelectorAll("[data-topic-toggle]")
+                    .forEach((btn) => {
+                        const topic = btn.getAttribute("data-topic-toggle");
+                        if (btn.classList.contains("chip-active")) {
+                            newTopics.push(topic);
+                        }
+                    });
+            }
+            settings.preferredTopics = newTopics.length
+                ? newTopics
+                : [...defaultSettings.preferredTopics];
+
+            saveSettings(settings);
+            applySettingsToUI();
+            closeModal();
+        });
+    }
+
+    // переключение тем
     if (topicsContainer) {
         topicsContainer
             .querySelectorAll("[data-topic-toggle]")
@@ -146,6 +181,7 @@ if (navToggle && nav) {
             });
     }
 
+    // "Поделиться правилами"
     if (shareBtn && shareHint) {
         shareBtn.addEventListener("click", async () => {
             const text =
@@ -153,7 +189,9 @@ if (navToggle && nav) {
                 `• максимум ${settings.maxMinutes} минут видео в будни;\n` +
                 `• короткие ролики не более ${settings.shortsLimit} подряд;\n` +
                 "• Reels " +
-                (settings.allowShorts ? "разрешены в учебном режиме." : "сейчас отключены.");
+                (settings.allowShorts
+                    ? "разрешены в учебном режиме."
+                    : "сейчас отключены.");
             try {
                 await navigator.clipboard.writeText(text);
                 shareHint.hidden = false;
@@ -166,6 +204,7 @@ if (navToggle && nav) {
         });
     }
 })();
+
 
 // ---------- ЛЕНТА РЕБЁНКА ----------
 (function setupChildFeed() {
