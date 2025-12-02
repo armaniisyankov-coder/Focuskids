@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusKids · Панель родителя</title>
+    <link rel="stylesheet" href="arman.css">
+</head>
+<body class="app-body">
+
+<div class="app-shell">
+    <header class="app-header">
+        <div class="app-title">
+            <span class="app-logo-dot"></span>
+            FocusKids · Родитель
+        </div>
+    </header>
+
+    <main class="app-content">
+        <h1 class="app-heading">Контроль контента</h1>
+        <p class="app-subtitle">
+            Видите, что ребёнок смотрит, и управляете лентой рекомендаций.
+        </p>
+
+        <section class="parent-grid">
+            <div class="card parent-card">
+                <h2>Сегодняшняя активность</h2>
+                <p class="parent-stat"><strong>32 мин</strong> образовательных видео</p>
+                <p class="parent-stat"><strong>0</strong> коротких клипов</p>
+                <p class="card-text">
+                    Короткие ролики ограничены до 5 минут в день.
+                </p>
+            </div>
+
+            <div class="card parent-card">
+                <h2>Фильтр тем</h2>
+                <p class="card-text">Отмеченные темы появляются чаще в ленте ребёнка.</p>
+                <div class="app-chips">
+                    <button class="chip chip-active">Наука</button>
+                    <button class="chip chip-active">Животные</button>
+                    <button class="chip">Игры</button>
+                    <button class="chip">Развлекуха</button>
+                </div>
+            </div>
+
+            <div class="card parent-card">
+                <h2>Правила</h2>
+                <ul class="rules-list">
+                    <li>Максимум 40 минут видео в будни</li>
+                    <li>Короткие видео только после уроков</li>
+                    <li>Перед сном — только спокойные ролики и чтение</li>
+                </ul>
+                <button class="btn btn-primary btn-small">Изменить правила</button>
+            </div>
+        </section>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="app-child.html" class="bottom-nav-item">
+            🏠 <span>Лента ребёнка</span>
+        </a>
+        <a href="app-parent.html" class="bottom-nav-item bottom-nav-item-active">
+            📊 <span>Родитель</span>
+        </a>
+        <a href="index.html" class="bottom-nav-item">
+            🌐 <span>Сайт</span>
+        </a>
+    </nav>
+</div>
+
+<script src="arman.js"></script>
+</body>
+</html>
