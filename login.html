@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход — FocusKids</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div class="auth-box">
+    <h2>Вход</h2>
+
+    <input id="login-email" type="email" placeholder="Email" required>
+    <input id="login-pass" type="password" placeholder="Пароль" required>
+
+    <button id="btn-login">Войти</button>
+
+    <p class="small">
+        Нет аккаунта?
+        <a href="register.html">Создать</a>
+    </p>
+
+    <p id="login-error" class="error"></p>
+</div>
+
+<script src="auth.js"></script>
+</body>
+</html>

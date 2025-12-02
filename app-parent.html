@@ -106,35 +106,41 @@
 
 
     <!-- МОДАЛЬНОЕ ОКНО -->
+    <!-- МОДАЛКА НАСТРОЕК -->
     <div id="settings-modal" hidden>
         <div class="modal-window">
+            <div class="modal-header">
+                <h2>Настройки умной ленты</h2>
+                <button class="modal-close" id="close-settings">✕</button>
+            </div>
 
-            <button class="modal-close" id="close-settings">✕</button>
+            <div class="modal-body">
+                <label class="toggle">
+                    <input type="checkbox" id="allow-shorts-input" checked>
+                    <span class="toggle-slider"></span>
+                    <span class="toggle-label">Разрешать короткие Reels</span>
+                </label>
+                <p class="modal-note">
+                    Если выключить — раздел Reels будет скрыт у ребёнка.
+                </p>
 
-            <h3>Настройки умной ленты</h3>
+                <div class="modal-block">
+                    <label for="shorts-limit-input">Максимум коротких роликов подряд</label>
+                    <input type="range" id="shorts-limit-input" min="1" max="5" value="3">
+                    <div class="range-value">
+                        <span id="shorts-limit-value">3</span> Reels
+                    </div>
+                </div>
 
-            <label class="switch-row">
-                <input type="checkbox" id="allow-shorts-input">
-                <span>Разрешать короткие Reels</span>
-            </label>
-            <p class="note">
-                Если выключить — раздел Reels будет скрыт у ребёнка.
-            </p>
+                <div class="modal-block">
+                    <label for="max-minutes-input">Максимум минут видео в будни</label>
+                    <input type="number" id="max-minutes-input" value="40" min="10" max="120" step="5">
+                </div>
+            </div>
 
-            <label>
-                Максимум коротких роликов подряд:
-                <span id="shorts-limit-value">3</span>
-            </label>
-            <input type="range" id="shorts-limit-input" min="1" max="5">
-
-            <label style="margin-top:16px;">
-                Максимум минут видео в будни
-            </label>
-            <input type="number" id="max-minutes-input" min="10" max="180">
-
-            <div class="modal-buttons">
-                <button class="btn btn-secondary" id="cancel-settings">Отмена</button>
-                <button class="btn btn-primary" id="save-settings">Сохранить</button>
+            <div class="modal-footer">
+                <button class="btn btn-ghost btn-small" id="cancel-settings">Отмена</button>
+                <button class="btn btn-primary btn-small" id="save-settings">Сохранить</button>
             </div>
         </div>
     </div>
