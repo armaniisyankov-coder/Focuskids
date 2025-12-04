@@ -3,100 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FocusKids · Лента ребёнка</title>
-    <link rel="stylesheet" href="arman.css?v=4">
+    <title>DreamSpace · Лента ребёнка</title>
+    <link rel="stylesheet" href="arman.css?v=20">
 </head>
-<body class="app-body">
+<body>
 
+<div class="app-body">
 <div class="app-shell">
-    <header class="app-header">
-        <div class="app-title">
-            <span class="app-logo-dot"></span>
-            FocusKids
-        </div>
-        <div class="app-profile">
-            👦 10 лет
+
+    <header class="header">
+        <div class="header-title">
+            <div class="dot"></div>
+            DreamSpace
         </div>
     </header>
 
-    <main class="app-content">
-        <h1 class="app-heading">Рекомендации на сегодня</h1>
-        <p class="app-subtitle" id="child-subtitle">
-            Это умная лента: здесь смешаны видео, мультфильмы и статьи,
-            которые подошли именно тебе по интересам.
-        </p>
+    <div class="content">
 
-        <!-- ФИЛЬТРЫ ТЕМ -->
-        <div class="app-chips">
-            <button class="chip chip-active" data-topic="all">Все</button>
-            <button class="chip" data-topic="science">Наука</button>
-            <button class="chip" data-topic="animals">Животные</button>
-            <button class="chip" data-topic="history">История</button>
-            <button class="chip" data-topic="space">Космос</button>
+        <div class="feed-card">
+            <div class="feed-thumb"></div>
+            <div>
+                <div class="feed-info-title">Почему исчезли динозавры?</div>
+                <div class="feed-info-meta">Наука · 4 мин</div>
+            </div>
         </div>
 
-        <!-- УМНАЯ ЛЕНТА -->
-        <section class="feed">
-            <article class="feed-card" data-topic="science">
-                <p class="feed-tag">Видео · Наука</p>
-                <h2 class="feed-title">Почему Луна не падает на Землю?</h2>
-                <p class="feed-text">
-                    Короткое объяснение орбиты, гравитации и притяжения. 4 минуты.
-                </p>
-                <button class="btn btn-primary btn-small">Смотреть</button>
-            </article>
+        <div class="feed-card">
+            <div class="feed-thumb"></div>
+            <div>
+                <div class="feed-info-title">Как устроена Солнечная система</div>
+                <div class="feed-info-meta">Космос · 6 мин</div>
+            </div>
+        </div>
 
-            <article class="feed-card" data-topic="animals">
-                <p class="feed-tag">Мультфильм · Животные</p>
-                <h2 class="feed-title">Путешествие капли воды</h2>
-                <p class="feed-text">
-                    Мультфильм про круговорот воды в природе: облака, дождь, реки и океан.
-                </p>
-                <button class="btn btn-primary btn-small">Смотреть</button>
-            </article>
+        <div class="feed-card">
+            <div class="feed-thumb"></div>
+            <div>
+                <div class="feed-info-title">Жизнь под океаном</div>
+                <div class="feed-info-meta">Животные · 5 мин</div>
+            </div>
+        </div>
 
-            <article class="feed-card" data-topic="history">
-                <p class="feed-tag">Статья · История</p>
-                <h2 class="feed-title">Наши великие предки</h2>
-                <p class="feed-text">
-                    История трёх учёных, которые изменили мир. 5–7 минут чтения.
-                </p>
-                <button class="btn btn-ghost btn-small">Читать</button>
-            </article>
-
-            <article class="feed-card" data-topic="space">
-                <p class="feed-tag">Видео · Космос</p>
-                <h2 class="feed-title">Как устроена Солнечная система</h2>
-                <p class="feed-text">
-                    Анимация о планетах, орбитах и Солнце. Понятно даже младшим школьникам.
-                </p>
-                <button class="btn btn-primary btn-small">Смотреть</button>
-            </article>
-
-            <article class="feed-card" data-topic="science">
-                <p class="feed-tag">Мини-курс · Наука</p>
-                <h2 class="feed-title">Эксперименты на кухне</h2>
-                <p class="feed-text">
-                    Серия коротких безопасных опытов, которые можно повторить дома.
-                </p>
-                <button class="btn btn-primary btn-small">Открыть плейлист</button>
-            </article>
-        </section>
-    </main>
+    </div>
 
     <nav class="bottom-nav">
-        <a href="reels.html?v=4" class="bottom-nav-item" id="nav-reels">
-            🎥 <span>Reels</span>
+        <a href="app-parent.html" class="nav-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25694.png">
+            <span>Родитель</span>
         </a>
-        <a href="app-child.html?v=4" class="bottom-nav-item bottom-nav-item-active">
-            📚 <span>Лента</span>
+
+        <a class="nav-item active">
+            <img src="https://cdn-icons-png.flaticon.com/512/841/841364.png">
+            <span>Лента</span>
         </a>
-        <a href="app-parent.html?v=4" class="bottom-nav-item">
-            👨‍👩‍👧 <span>Родитель</span>
+
+        <a href="reels.html" class="nav-item">
+            <img src="https://cdn-icons-png.flaticon.com/512/709/709724.png">
+            <span>Reels</span>
         </a>
     </nav>
+
+</div>
 </div>
 
-<script src="arman.js?v=4"></script>
 </body>
 </html>

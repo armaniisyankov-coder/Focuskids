@@ -1,292 +1,201 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FocusKids · Умные видео вместо бесконечных Reels</title>
-    <link rel="stylesheet" href="arman.css?v=2">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamSpace · Умное видео вместо бесконечных Reels</title>
+    <link rel="stylesheet" href="arman.css?v=20">
 </head>
 <body>
-    <!-- ШАПКА -->
-    <header class="header">
-        <div class="container header-inner">
-            <div class="logo">FocusKids</div>
 
-            <nav class="nav">
-                <a href="#hero">Главная</a>
-                <a href="#how">Как работает</a>
-                <a href="#library">Библиотека</a>
-                <a href="#stats">Почему важно</a>
-                <a href="#testimonials">Отзывы</a>
-                <a href="#cta">Начать</a>
-            </nav>
+<div class="page-shell">
 
-            <button class="nav-toggle" id="navToggle">☰</button>
+    <header class="landing-header">
+        <div class="landing-logo">
+            <div class="logo-badge">DS</div>
+            <div class="logo-text">
+                <div class="logo-title">DreamSpace</div>
+                <div class="logo-sub">Умная видео-среда для детей</div>
+            </div>
         </div>
+
+        <nav class="landing-nav">
+            <a href="#how">Как работает</a>
+            <a href="#library">Библиотека</a>
+            <a href="#why">Почему важно</a>
+            <a href="#reviews">Отзывы</a>
+        </nav>
+
+        <a href="app-parent.html" class="landing-login">Войти</a>
     </header>
+
 
     <main>
         <!-- HERO -->
-        <section class="section hero" id="hero">
-            <div class="container hero-inner">
-                <div class="hero-left">
-                    <p class="eyebrow">Для родителей, учителей и детей</p>
-                    <h1>
-                        Помогаем детям перестать залипать<br />
-                        в коротких видео и вернуть концентрацию
-                    </h1>
-                    <p class="hero-text">
-                        FocusKids фильтрует рекомендации Reels / Shorts / клипов и заменяет
-                        бессмысленный контент на отобранные образовательные видео,
-                        статьи и книги.
-                    </p>
+        <section class="hero">
+            <div class="hero-left">
+                <p class="hero-eyebrow">Будущее детского внимания</p>
+                <h1 class="hero-title">
+                    DreamSpace помогает детям перестать
+                    залипать в коротких видео и вернуть концентрацию
+                </h1>
+                <p class="hero-subtitle">
+                    DreamSpace заменяет токсичный контент Reels/Shorts на
+                    отобранные образовательные видео, статьи и интерактивы.
+                </p>
 
-                    <div class="hero-actions">
-                        <a href="#cta" class="btn btn-primary">Попробовать концепт</a>
-                        <a href="#library" class="btn btn-ghost">Посмотреть материалы</a>
-                    </div>
-
-                    <div class="hero-tags">
-                        <span>• Ограничение коротких видео</span>
-                        <span>• Развивающий контент</span>
-                        <span>• Отчёты для родителей</span>
-                    </div>
+                <div class="hero-actions">
+                    <a href="app-child.html" class="btn btn-primary">Открыть ленту</a>
+                    <a href="app-parent.html" class="btn btn-secondary">Панель родителя</a>
                 </div>
 
-                <div class="hero-right">
-                    <div class="hero-card">
-                        <p class="hero-card-title">Лента ребёнка сегодня</p>
-                        <ul>
-                            <li>15 секундные мемы</li>
-                            <li>бесконечный скролл</li>
-                            <li>случайные тренды</li>
-                        </ul>
+                <div class="hero-tags">
+                    <span class="pill">Развивающие видео</span>
+                    <span class="pill">Безопасная лента</span>
+                    <span class="pill">Отчёты родителю</span>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="hero-phone">
+                    <div class="phone-header">
+                        <span class="phone-dot"></span>
+                        Лента DreamSpace
                     </div>
 
-                    <div class="hero-card hero-card-accent">
-                        <p class="hero-card-title">Лента с FocusKids</p>
-                        <ul>
-                            <li>анимации про устройство мира</li>
-                            <li>короткие объяснения по школьным темам</li>
-                            <li>серия видео по естественным наукам</li>
-                        </ul>
+                    <div class="phone-card">
+                        <div class="phone-label">Сегодня</div>
+                        <div class="phone-line"><span>40 мин</span> обучения</div>
+                        <div class="phone-line"><span>1</span> короткий ролик</div>
+                        <div class="phone-note">Reels ограничены до 3 подряд.</div>
+                    </div>
+
+                    <div class="phone-bottom">
+                        Интересы: наука · история · животные
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- КОМУ ПОДХОДИТ -->
-        <section class="section brands">
-            <div class="container brands-inner">
-                <p>Podходит для:</p>
-                <div class="brand-list">
-                    <span>Семей</span>
-                    <span>Школ</span>
-                    <span>Онлайн-кружков</span>
-                    <span>Психологов</span>
-                </div>
-            </div>
-        </section>
 
         <!-- КАК РАБОТАЕТ -->
         <section class="section" id="how">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Как будет работать приложение</h2>
-                    <p>Концепция MVP: простая логика, которая уже меняет поведение ребёнка.</p>
+            <div class="section-header">
+                <h2>Как работает DreamSpace</h2>
+                <p class="section-sub">Умная система фильтрации видеоконтента.</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Настройки родителя</h3>
+                    <p>Темы: наука, животные, история, технологии.</p>
                 </div>
 
-                <div class="grid grid-3">
-                    <div class="card step-card">
-                        <div class="step-badge">1</div>
-                        <h3>Подключаем источники</h3>
-                        <p>
-                            Родитель выбирает, с каких платформ брать рекомендации
-                            и какие темы интересуют ребёнка: наука, история, животные и т.д.
-                        </p>
-                    </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Фильтрация контента</h3>
+                    <p>Скрываем быстрые Reels, повышаем приоритет развитию.</p>
+                </div>
 
-                    <div class="card step-card">
-                        <div class="step-badge">2</div>
-                        <h3>Фильтруем контент</h3>
-                        <p>
-                            Алгоритм скрывает импульсивные короткие ролики
-                            и отдаёт приоритет развивающим видео, статьям и книгам.
-                        </p>
-                    </div>
-
-                    <div class="card step-card">
-                        <div class="step-badge">3</div>
-                        <h3>Формируем ленту FocusKids</h3>
-                        <p>
-                            Ребёнок открывает красивую, простую ленту с отобранным
-                            контентом — без токсичных трендов и бесконечного скролла.
-                        </p>
-                    </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Лента ребёнка</h3>
+                    <p>Ребёнок получает мягкую ленту без бесконечного скролла.</p>
                 </div>
             </div>
         </section>
 
-        <!-- БИБЛИОТЕКА ПРИМЕРОВ -->
-        <section class="section section-alt" id="library">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Примеры материалов в библиотеке</h2>
-                    <p>Все материалы подобраны так, чтобы развивать любопытство, а не просто развлекать.</p>
-                </div>
 
-                <div class="grid grid-3">
-                    <div class="card">
-                        <p class="tag">Научная статья</p>
-                        <h3>«Большая эволюция»</h3>
-                        <p class="meta">Группа «Брига»</p>
-                        <p class="card-text">
-                            Понятное объяснение того, как развивалась жизнь на Земле. Подходит для старших классов.
-                        </p>
-                    </div>
+        <!-- БИБЛИОТЕКА -->
+        <section class="section" id="library">
+            <div class="section-header">
+                <h2>Библиотека DreamSpace</h2>
+                <p class="section-sub">Только полезные материалы.</p>
+            </div>
 
-                    <div class="card">
-                        <p class="tag">Видео</p>
-                        <h3>«Наш мир»</h3>
-                        <p class="meta">Компания «Бэн»</p>
-                        <p class="card-text">
-                            Образовательный ролик о планете, экосистемах и месте человека в мире.
-                        </p>
-                    </div>
+            <div class="card-grid">
+                <article class="card">
+                    <h3>«Большая эволюция»</h3>
+                    <p class="card-meta">Научная статья</p>
+                    <p>Коротко и интересно о развитии жизни на Земле.</p>
+                </article>
 
-                    <div class="card">
-                        <p class="tag">Статья</p>
-                        <h3>«Наши великие предки»</h3>
-                        <p class="meta">Алина Стерлингова</p>
-                        <p class="card-text">
-                            История великих учёных и изобретателей в формате, понятном подросткам.
-                        </p>
-                    </div>
+                <article class="card">
+                    <h3>«Наш мир»</h3>
+                    <p class="card-meta">Документальное видео</p>
+                    <p>О природе, климате и океанах.</p>
+                </article>
 
-                    <div class="card">
-                        <p class="tag">Статья</p>
-                        <h3>«Круг жизни»</h3>
-                        <p class="meta">Софья Петрова</p>
-                        <p class="card-text">
-                            Материал о циклах природы и взаимосвязи всего живого. Отличная база для обсуждений.
-                        </p>
-                    </div>
-
-                    <div class="card">
-                        <p class="tag">Книга</p>
-                        <h3>«Издание естественных наук 1»</h3>
-                        <p class="meta">Д. Б. Стасов</p>
-                        <p class="card-text">
-                            Расширенный курс по естественным наукам для детей, которые хотят копать глубже.
-                        </p>
-                    </div>
-
-                    <div class="card card-muted">
-                        <h3>…и другая curated-подборка</h3>
-                        <p class="card-text">
-                            В реальном приложении библиотека пополняется и подстраивается
-                            под возраст, интересы и уровень ребёнка.
-                        </p>
-                    </div>
-                </div>
+                <article class="card">
+                    <h3>«Наши великие предки»</h3>
+                    <p class="card-meta">Статья</p>
+                    <p>История людей, изменивших мир.</p>
+                </article>
             </div>
         </section>
 
-        <!-- ПОЧЕМУ ЭТО ВАЖНО -->
-        <section class="section" id="stats">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Почему вообще это нужно</h2>
-                    <p>Короткие видео меняют мозг ребёнка и ожидание награды.</p>
-                </div>
 
-                <div class="grid grid-3 stats-grid">
-                    <div class="card stat-card">
-                        <p class="stat-number">15–30 сек</p>
-                        <p class="stat-label">Средняя длина ролика</p>
-                        <p class="card-text">
-                            Мозг привыкает к мгновенной смене картинок и не хочет
-                            тратить время на длинные задачи.
-                        </p>
-                    </div>
+        <!-- ПОЧЕМУ ВАЖНО -->
+        <section class="section" id="why">
+            <div class="section-header">
+                <h2>Почему это важно</h2>
+                <p class="section-sub">Короткие видео ломают концентрацию.</p>
+            </div>
 
-                    <div class="card stat-card">
-                        <p class="stat-number">×1000</p>
-                        <p class="stat-label">роликов за вечер</p>
-                        <p class="card-text">
-                            За пару часов ребёнок может прокрутить больше контента,
-                            чем раньше видел за неделю.
-                        </p>
-                    </div>
-
-                    <div class="card stat-card">
-                        <p class="stat-number">+Focus</p>
-                        <p class="stat-label">возврат внимания</p>
-                        <p class="card-text">
-                            Ограничение короткого контента и переход к осмысленным
-                            видео постепенно возвращают концентрацию.
-                        </p>
-                    </div>
-                </div>
+            <div class="card highlight-card">
+                <p>
+                    Reels и Shorts формируют зависимость от быстрой награды.
+                    Ребёнку становится сложнее делать задачи, требующие внимания.
+                </p>
+                <p class="note">
+                    DreamSpace снижает количество «мусорных» роликов и развивает интерес к знаниям.
+                </p>
             </div>
         </section>
+
 
         <!-- ОТЗЫВЫ -->
-        <section class="section section-alt" id="testimonials">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Что говорят родители (концепция)</h2>
-                    <p>В реальном продукте здесь будут живые отзывы пользователей.</p>
-                </div>
+        <section class="section" id="reviews">
+            <div class="section-header">
+                <h2>Отзывы родителей и педагогов</h2>
+            </div>
 
-                <div class="grid grid-2">
-                    <div class="card quote-card">
-                        <p class="quote-mark">“</p>
-                        <p class="card-text">
-                            Раньше ребёнок просто листал клипы по два часа.
-                            После перехода на отобранные видео он стал задавать вопросы
-                            про космос и животных. Главное — мы контролируем, что он смотрит.
-                        </p>
-                        <p class="meta">Марина, мама 10-летнего сына</p>
-                    </div>
+            <div class="card-grid">
+                <article class="card testimonial">
+                    <p class="testimonial-text">
+                        «Ребёнок начал обсуждать факты, а не тренды. Сон и поведение улучшились.»
+                    </p>
+                    <p class="testimonial-author">Мама 10-летнего ученика</p>
+                </article>
 
-                    <div class="card quote-card">
-                        <p class="quote-mark">“</p>
-                        <p class="card-text">
-                            На уроках дети перестали «вырубаться» через пять минут.
-                            Мы использовали идею FocusKids как часть классных часов.
-                        </p>
-                        <p class="meta">Игорь, учитель естественных наук</p>
-                    </div>
-                </div>
+                <article class="card testimonial">
+                    <p class="testimonial-text">
+                        «Используем DreamSpace на кружке для интерактивных занятий.»
+                    </p>
+                    <p class="testimonial-author">Педагог</p>
+                </article>
             </div>
         </section>
+
 
         <!-- CTA -->
-        <section class="section cta-section" id="cta">
-            <div class="container cta-inner">
-                <div class="cta-text">
-                    <h2>Готов начать с прототипа?</h2>
-                    <p>
-                        Это учебный проект. На этом месте позже появится форма регистрации
-                        или ссылка на приложение. Сейчас страница показывает идею и логику продукта.
-                    </p>
+        <section class="section">
+            <div class="cta-footer">
+                <div>
+                    <h2>Готовы попробовать?</h2>
+                    <p class="section-sub">Откройте прототип DreamSpace.</p>
                 </div>
-                <div class="cta-action">
-                    <button class="btn btn-primary">Добавить сюда форму позже</button>
+
+                <div class="cta-footer-actions">
+                    <a href="app-parent.html" class="btn btn-primary">Родитель</a>
+                    <a href="app-child.html" class="btn btn-ghost">Для ребёнка</a>
                 </div>
             </div>
         </section>
+
     </main>
+</div>
 
-    <!-- ФУТЕР -->
-    <footer class="footer">
-        <div class="container footer-inner">
-            <p>© 2025 FocusKids. Сделано для учебного проекта.</p>
-            <p class="footer-small">Про Reels / Shorts, концентрацию и умный контент для детей.</p>
-        </div>
-    </footer>
-
-    <script src="arman.js"></script>
 </body>
 </html>
